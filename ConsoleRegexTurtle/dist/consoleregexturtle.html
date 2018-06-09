@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Title</title>
+    <title>ConsoleRegexTurtle JSON generator</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -68,7 +68,7 @@
         {
             var textToWrite = document.getElementById('jsonOutput').innerText;
             var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
-            var fileNameToSaveAs = "regex.json";
+            var fileNameToSaveAs = "regex_dataset.json";
         
             var downloadLink = document.createElement("a");
             downloadLink.download = fileNameToSaveAs;
@@ -94,6 +94,11 @@
             downloadLink.click();
         }
     </script>
+    <script>
+    function reloadPage() {
+        window.location.reload();
+    }
+    </script>
     <style>
     .jumbotron {
         padding: 2rem;
@@ -106,14 +111,14 @@
             <a class="navbar-brand-center" style="float: none" href="#">Navbar</a>
         </nav>
     </div> -->
-      <div class="container sticky-top">
+      <div class="container navbar sticky-top">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <button class="btn btn-warning" type="button" onclick="highlightButton()">Highlight</button>
             </div>
               <div class="custom-file">
                   <input type="file" onchange="openFile(event)" class="custom-file-input" id="inputGroupFile03">
-                  <label id="fileName" class="custom-file-label" for="inputGroupFile03">Choose file</label>
+                  <label id="fileName" class="custom-file-label" for="inputGroupFile03">Choose raw data file</label>
               </div>
           </div>
       </div>
@@ -125,8 +130,9 @@
         <div class="jumbotron">
             <div class="container"><div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <button class="btn btn-danger" type="button" onclick="makeJson()">Get JSON</button>
+                    <button class="btn btn-warning" type="button" onclick="makeJson()">Get JSON</button>
                     <button class="btn btn-success" type="button" id="save" onclick="saveTextAsFile()">Save</button>
+                    <button class="btn btn-danger" type="button" id="reset" onclick="reloadPage()">Reload Page</button>
                 </div>
             </div></div>
                 <pre id="jsonOutput"></pre>

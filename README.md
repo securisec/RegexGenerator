@@ -10,11 +10,11 @@ A simple HTML/JS file where one can load a raw text file, and highlight words an
 A simple py file where one can pass file containing a line seperated list of words. The output is either stdout or a JSON file which can be used with consoleregexturtle jar file. 
 
 ### Usage (command line tool)
-```shell
+```text
 java -jar RegexGenerator/ConsoleRegexTurtle/dist/ConsoleRegexTurtle.jar -d somefile.json
 ```
 
-```shell
+```text
 java -jar ConsoleRegexTurtle -t 4 -p 500 -g 1000 -e 20.0 -c "interesting evolution" -x true -d dataset.json -o ./outputfolder/
 
 On linux you can invoke this tool using the alternative script:
