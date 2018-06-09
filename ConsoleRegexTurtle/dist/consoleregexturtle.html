@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script>
+        var openFile = function (event) {
+                var input = event.target;
+                var filePath = document.getElementById("inputGroupFile03").baseURI;
+                filePath = filePath.replace("file://", "");
+
+                document.getElementById("fileName").innerText = filePath;
+                var reader = new FileReader();
+                reader.onload = function () {
+                    var text = reader.result;
+                    var node = document.getElementById('output');
+                    node.innerText = text;
+                };
+                reader.readAsText(input.files[0]);
+            };
+    </script>
+    <script type="text/javascript">
+        function highlightButton() {
+            window.document.designMode = "On";
+            window.document.execCommand("hiliteColor", false, "#ffc107");
+        }
+    </script>
+    <script>
+    function makeJson() {
+        var jsonParsed = {"examples": []};
+        var dataWithSpan = document.getElementById('output').innerHTML;
+        var data = document.getElementById('output').innerText.split('\n');
+        var dataArray = dataWithSpan.split('<br>');
+        var parser = new DOMParser();
+        for (let i = 0; i < dataArray.length; i++) {
+            const line = dataArray[i];
+            if (line.length !== 0) {
+                var dom = parser.parseFromString(line, 'text/html');
+                var spanTags = dom.getElementsByTagName("span");
+                if (spanTags.length > 0) {
+                    for (let x = 0; x < spanTags.length; x++) {
+                        var m = spanTags[x].innerText;
+                        var regex = new RegExp(m, "g");
+                        while (match = regex.exec(data[i])) {
+                            jsonParsed.examples.push({
+                                "string": data[i],
+                                "match": [{
+                                    "start": match.index,
+                                    "end": regex.lastIndex
+                                }]
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        console.log(JSON.stringify(jsonParsed));
+        document.getElementById('jsonOutput').innerText = JSON.stringify(jsonParsed, null, 2);
+    }
+    </script>
+    <script>
+    function saveTextAsFile()
+        {
+            var textToWrite = document.getElementById('jsonOutput').innerText;
+            var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'});
+            var fileNameToSaveAs = "regex.json";
+        
+            var downloadLink = document.createElement("a");
+            downloadLink.download = fileNameToSaveAs;
+            downloadLink.innerHTML = "Download File";
+            if (window.webkitURL != null)
+            {
+                // Chrome allows the link to be clicked
+                // without actually adding it to the DOM.
+                downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+            }
+            else
+            {
+                // Firefox requires the link to be added to the DOM
+                // before it can be clicked.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                downloadLink.onclick = function(){
+                	document.body.removeChild(downloadLink);
+                };
+                downloadLink.style.display = "none";
+                document.body.appendChild(downloadLink);
+            }
+        
+            downloadLink.click();
+        }
+    </script>
+    <style>
+    .jumbotron {
+        padding: 2rem;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="container">
+        <nav class="navbar">
+            <a class="navbar-brand-center" style="float: none" href="#">Navbar</a>
+        </nav>
+    </div> -->
+      <div class="container sticky-top">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button class="btn btn-warning" type="button" onclick="highlightButton()">Highlight</button>
+            </div>
+              <div class="custom-file">
+                  <input type="file" onchange="openFile(event)" class="custom-file-input" id="inputGroupFile03">
+                  <label id="fileName" class="custom-file-label" for="inputGroupFile03">Choose file</label>
+              </div>
+          </div>
+      </div>
+    <div class="container">
+        <div class="jumbotron form-group" onchange="openFile(event)">
+            <!-- <text-area class="form-control" id="output" rows="20"></text-area> -->
+            <pre contenteditable="true" id="output" >Paste or load file</pre>
+        </div>
+        <div class="jumbotron">
+            <div class="container"><div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <button class="btn btn-danger" type="button" onclick="makeJson()">Get JSON</button>
+                    <button class="btn btn-success" type="button" id="save" onclick="saveTextAsFile()">Save</button>
+                </div>
+            </div></div>
+                <pre id="jsonOutput"></pre>
+            </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

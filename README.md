@@ -1,3 +1,14 @@
+# Forked project
+
+## Changes
+The main change from the original project is the addition of two files to the RegexGenerator/ConsoleRegexTurtle/dist folder. consoleregexturtle.py and consoleregexturtle.html
+
+### consoleregexturtle.html
+A simple HTML/JS file where one can load a raw text file, and highlight words and generate a JSON file to be used with the consoleregexturtle jar file. 
+
+### consoleregexturtle.py
+A simple py file where one can pass file containing a line seperated list of words. The output is either stdout or a JSON file which can be used with consoleregexturtle jar file. 
+
 # RegexGenerator
 
 This project contains the source code of a tool for generating regular expressions for text extraction and classification (flagging):
