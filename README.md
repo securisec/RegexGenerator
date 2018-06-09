@@ -9,6 +9,39 @@ A simple HTML/JS file where one can load a raw text file, and highlight words an
 ### consoleregexturtle.py
 A simple py file where one can pass file containing a line seperated list of words. The output is either stdout or a JSON file which can be used with consoleregexturtle jar file. 
 
+### Usage (command line tool)
+```shell
+java -jar RegexGenerator/ConsoleRegexTurtle/dist/ConsoleRegexTurtle.jar -d somefile.json
+```
+
+```shell
+java -jar ConsoleRegexTurtle -t 4 -p 500 -g 1000 -e 20.0 -c "interesting evolution" -x true -d dataset.json -o ./outputfolder/
+
+On linux you can invoke this tool using the alternative script:
+regexturtle.sh -t 4 -p 500 -g 1000 -e 20.0 -c "interesting evolution" -d dataset.json -o ./outputfolder/
+
+Parameters:
+-t number of threads, default is 2
+-p population size, default is 500
+-g maximum number of generations, per Job, default si 1000
+-j number of Jobs, default si 32
+-e percentange of number generations, defines a threshold for the separate and conquer split criteria, when best doesn't change for the provided % of generation the Job evolution separates the dataset.
+   Default is 20%, 200 geberations with default 1000 generations.
+-d path of the dataset json file containing the examples, this parameter is mandatory.
+-o name of the output folder, results.json is saved into this folder; default is '.'
+-x boolean, populates an extra field in results file, when 'true' adds all dataset examples in the results file 'examples' field, default is 'false'
+-s boolean, when 'true' enables dataset striping, striping is an experimental feature, default is disabled: 'false'
+-c adds an optional comment string
+-h visualizes this help message
+
+Dataset path is needed.
+Usage:
+java -jar ConsoleRegexTurtle -t 4 -p 500 -g 1000 -e 20.0 -c "interesting evolution" -x true -d dataset.json -o ./outputfolder/
+
+On linux you can invoke this tool using the alternative script:
+regexturtle.sh -t 4 -p 500 -g 1000 -e 20.0 -c "interesting evolution" -d dataset.json -o ./outputfolder/
+```
+
 # RegexGenerator
 
 This project contains the source code of a tool for generating regular expressions for text extraction and classification (flagging):
