@@ -7,11 +7,11 @@ The main change from the original project is the addition of two files to the Re
 A simple HTML/JS file where one can load a raw text file, and highlight words and generate a JSON file to be used with the consoleregexturtle jar file. 
 
 ### consoleregexturtle.py
-A simple py file where one can pass file containing a line seperated list of words. The output is either stdout or a JSON file which can be used with consoleregexturtle jar file. 
+A simple py file where one can pass file containing a line seperated list of words. The output is either stdout or a JSON file which can be used with consoleregexturtle jar file.
 
 ### Usage (command line tool)
 ```text
-java -jar RegexGenerator/ConsoleRegexTurtle/dist/ConsoleRegexTurtle.jar -d somefile.json
+java -jar ConsoleRegexTurtle.jar -d regex_dataset.json
 ```
 
 ```text
