@@ -59,7 +59,6 @@
                 }
             }
         }
-        console.log(JSON.stringify(jsonParsed));
         document.getElementById('jsonOutput').innerText = JSON.stringify(jsonParsed, null, 2);
     }
     </script>
@@ -125,7 +124,7 @@
     <div class="container">
         <div class="jumbotron form-group" onchange="openFile(event)">
             <!-- <text-area class="form-control" id="output" rows="20"></text-area> -->
-            <pre contenteditable="true" id="output" >Paste or load file</pre>
+            <pre contenteditable="true" id="output" >Paste or load file. Then select the words to regex for and click highlight</pre>
         </div>
         <div class="jumbotron">
             <div class="container"><div class="input-group mb-3">

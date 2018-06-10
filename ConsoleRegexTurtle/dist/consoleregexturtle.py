@@ -33,6 +33,6 @@ data['examples'].append({'string': '12345678', 'match': []})
 
 if args.write:
     with open(args.write, 'w+') as r:
-        r.write(data)
+        r.write(json.dumps(data))
 else:
     print(json.dumps(data))
